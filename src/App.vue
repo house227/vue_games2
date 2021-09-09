@@ -1,14 +1,15 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
+  <div id="app">
+    <square v-bind:square="square"/>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import square from './components/square.vue'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    square
   }
 }
 </script>
@@ -22,4 +23,14 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+
+/* .square{
+        height: 200px;
+        width: 200px;
+        text-align: center;
+        font-size: 100px;
+        line-height: 200px;
+        border: 1px solid black;
+        margin: 0;
+        } */
 </style>
