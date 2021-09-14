@@ -1,19 +1,19 @@
 <template>
     <div class="cell" @click="action">
-       <p>{{ msg }}</p> 
+        <div> {{ square_cell }}</div>
     </div>
 
 </template>
 
 <script>
-
+let cnt = 0;
 export default{
 name:'square',
 props: {
-    msg: String
+    square_cell: String
 },
 mounted(){
-    this.cnt = 0
+    this.cnt = 1
 },
 methods:{
     action(){
@@ -23,9 +23,19 @@ methods:{
         }else{
             this.msg = '✖'
         }
-
     }
 }
 
 }
 </script>
+
+<style>
+.cell{
+    border: 1px solid black;
+    height: 200px;
+    width: 200px;
+    text-align: center;
+    line-height: 90px;
+    font-size: 30px;
+}
+</style>
