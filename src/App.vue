@@ -1,26 +1,44 @@
 <template>
-    <square v-bind:square_cell="a" @click="action"/>
+
+    <div id="game">
+        <square 
+            v-bind:cnt = "cnt"
+            v-for="n of 9"
+            v-bind:key="n"
+            @click="click_action"
+        />
+    </div>
+    <!-- @(v-on:)でクリックイベントを発生させる(カウンター) -->
 </template>
 
-<script>
 
-let cnt = 0;
+<script>
 import square from './components/square.vue'
 export default{
     name: 'App',
+    data(){
+        return{
+            // クリック回数cntを０で初期化
+            cnt:0,
+        };
+    },
     components: {
         square
     },
     methods:{
-        action(){
-            cnt++
-            if(cnt % 2 !== 0){
-            this.a = '○'
-        }else{
-            this.a = '✖'
-        }
+        click_action(){
+            this.cnt++
+            
         }
     }
-
-}
+};
 </script>
+
+<style >
+#game{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 450px;
+}
+
+</style>
