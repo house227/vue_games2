@@ -17,7 +17,8 @@ export default{
         // 親から送られてきたクリック回数をNumber型で受け取る
     props: {
         cnt: Number,
-        key: Number
+        // 親のkeyから各コンポーネントの番号を受け取る
+        number: Number
     },
     mounted(){
         // 子特有のカウンターをブラウザ起動時に０で初期化
@@ -25,13 +26,22 @@ export default{
     },
     methods:{
         // クリックイベント
+        //!!!二回押すと不具合が出ているので直す!!!
         action(){
+            // コンポーネントの番号が受け取れてるかのテスト
+            console.log(this.number)
+
+            // 自分がクリックされた事を親へ送るemit
+            this.$emit('cell_did',this.number)
+
             // 親から受け取ったクリック回数を元に条件分岐
             // 子特有のカウンターbit_cntですでにクリックしたかを確認
             // クリックされていればカウントが１なので条件が通らない。
             if(this.cnt % 2 === 0 && this.bit_cnt === 0){
                 this.square_cell = "〇";
+                console.log(this.bit_cnt)
                 this.bit_cnt++
+                
             }else if(this.cnt % 2 !== 0 && this.bit_cnt === 0){
                 this.square_cell = "✖";
                 this.bit_cnt++
