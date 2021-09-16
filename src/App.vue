@@ -1,27 +1,28 @@
 <template>
 
     <div id="game">
-        <square :cnt="cnt" @click="click_action" class="cell1"/>
-        <square :cnt="cnt" @click="click_action" class="cell2"/>
-        <square :cnt="cnt" @click="click_action" class="cell3"/>
-        <square :cnt="cnt" @click="click_action" class="cell4"/>
-        <square :cnt="cnt" @click="click_action" class="cell5"/>
-        <square :cnt="cnt" @click="click_action" class="cell6"/>
-        <square :cnt="cnt" @click="click_action" class="cell7"/>
-        <square :cnt="cnt" @click="click_action" class="cell8"/>
-        <square :cnt="cnt" @click="click_action" class="cell9"/>
+        <square 
+            :cnt="cnt"
+            v-for="n of 9"
+            :key="n"
+            @click="click_action"
+        />
     </div>
 
     <!-- @(v-on:)でクリックイベントを発生させる(カウンター) -->
     <!-- v-bindは（：）に省略可 -->
 
 <!-- 元のPG -->
-            <!-- <square 
-            :cnt="cnt"
-            v-for="n of 9"
-            :key="n"
-            @click="click_action"
-        /> -->
+    <!-- <square :cnt="cnt" @click="click_action" class="cell1"/>
+    <square :cnt="cnt" @click="click_action" class="cell2"/>
+    <square :cnt="cnt" @click="click_action" class="cell3"/>
+    <square :cnt="cnt" @click="click_action" class="cell4"/>
+    <square :cnt="cnt" @click="click_action" class="cell5"/>
+    <square :cnt="cnt" @click="click_action" class="cell6"/>
+    <square :cnt="cnt" @click="click_action" class="cell7"/>
+    <square :cnt="cnt" @click="click_action" class="cell8"/>
+    <square :cnt="cnt" @click="click_action" class="cell9"/> -->
+
 </template>
 
 
