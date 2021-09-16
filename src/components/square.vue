@@ -2,7 +2,6 @@
 <!-- マスに@(v-on:)でクリックイベント追加 -->
     <div class="cell" @click="action">
         <div> {{ square_cell }}</div>
-        <p>{{ n }}</p>
     </div>
 
 </template>
