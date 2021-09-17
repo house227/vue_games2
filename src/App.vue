@@ -43,19 +43,27 @@ export default{
             // クリック回数cntを０で初期化
             cnt:0,
             // ゲームの状況を保存する配列
-            states:[0,0,0,0,0,0,0,0,0]
+            states:[0,0,0,0,0,0,0,0,0],
+            lines:[
+                status[0,1,2]
+            ]
         };
     },
     components: {
         square
     },
     methods:{
+        // クリックイベント。全体のクリック数を++
         click_action(){
             this.cnt++
         },
-        cell_did_event(){
-
+        // セルに○/✖が入った時のイベント(emit)
+        cell_did_event(con_number, num){
+            this.status[con_number - 1] = num
+            console.log(this.status)
         },
+        // 同じ場所をクリックされた時のイベント
+        // 全体のクリック数を--
         w_click_event(){
             this.cnt-- 
         }
