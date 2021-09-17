@@ -9,6 +9,7 @@
             @click="click_action"
             @cell_did="cell_did_event"
             @w_click="w_click_event"
+            @game_data="game_data"
         />
     </div>
 
@@ -16,7 +17,7 @@
     <!-- v-bindは（：）に省略可 -->
 
     <!-- :keyにfor文で使った「nの値」を代入しているので、
-                        :keyが各コンポーネントの番号を持っている -->
+                    :keyが各コンポーネントの番号を持っている -->
     <!-- keyでpropsを受け取ると不具合が起こるので、:numberで送る  -->
 
 
@@ -46,16 +47,9 @@ export default{
             status:[0,0,0,0,0,0,0,0,0],
             lines:[
                 // 横ライン
-                {x_line1: [status[0], status[1], status[2]]},
-                {x_line2: [status[3], status[4], status[5]]},
-                {x_line3: [status[6], status[7], status[8]]},
-                // 縦ライン
-                {y_line1: [status[0], status[3], status[6]]},
-                {y_line2: [status[1], status[4], status[7]]},
-                {y_line3: [status[2], status[5], status[8]]},
-                // 斜めライン
-                {z_line1: [status[0], status[4], status[8]]},
-                {z_line2: [status[2], status[4], status[6]]}
+                [status[0], status[1], status[2]],
+                [status[3], status[4], status[5]],
+                [status[6], status[7], status[8]]
             ]
         };
     },
@@ -67,15 +61,28 @@ export default{
         click_action(){
             this.cnt++
         },
+
         // セルに○/✖が入った時のイベント(emit)
         cell_did_event(con_number, num){
-            this.status[con_number - 1] = num
-            console.log(this.status)
+            // ゲーム状況を記録するステータス配列に〇(1)か×(-1)かを入れる
+            this.status[--con_number] = num
+            // ライン配列に値を代入する
         },
-        // 同じ場所をクリックされた時のイベント
-        // 全体のクリック数を--
+
+        // 同じ場所をクリックされた時のイベント。全体のクリック数を--
         w_click_event(){
             this.cnt-- 
+        },
+
+        //ライン配列にステータスを随時追加していく 
+        game_data(){
+            let x = 0;
+            for(let i = 0; i < this.lines.length; i++){
+                for(let j = 0; j < this.lines[0].length; j++){
+                    this.lines[i][j] = this.status[x++];
+                    // console.log("ライン配列" + this.lines[i][j])
+                }
+            }
         }
     }
     // 子から受け取った情報を使うメソッドの作成
@@ -89,4 +96,17 @@ export default{
     grid-template-columns: 1fr 1fr 1fr;
     width: 450px;
 }
+
+/* {x_line1: [status[0], status[1], status[2]]},
+{x_line2: [status[3], status[4], status[5]]},
+{x_line3: [status[6], status[7], status[8]]},
+// 縦ライン
+{y_line1: [status[0], status[3], status[6]]},
+{y_line2: [status[1], status[4], status[7]]},
+{y_line3: [status[2], status[5], status[8]]},
+// 斜めライン
+{z_line1: [status[0], status[4], status[8]]},
+{z_line2: [status[2], status[4], status[6]]} */
+
 </style>
+
