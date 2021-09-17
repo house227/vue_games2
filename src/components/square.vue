@@ -34,7 +34,7 @@ export default{
             if(this.click_cnt === 1){
                 this.$emit('w_click')
             }
-
+    console.log(this.number)
             // 親から受け取ったクリック回数を元に条件分岐
             // 子特有のカウンターbit_cntですでにクリックしたかを確認
             // クリックされていればカウントが１なので条件が通らない。

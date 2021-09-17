@@ -43,9 +43,19 @@ export default{
             // クリック回数cntを０で初期化
             cnt:0,
             // ゲームの状況を保存する配列
-            states:[0,0,0,0,0,0,0,0,0],
+            status:[0,0,0,0,0,0,0,0,0],
             lines:[
-                status[0,1,2]
+                // 横ライン
+                {x_line1: [status[0], status[1], status[2]]},
+                {x_line2: [status[3], status[4], status[5]]},
+                {x_line3: [status[6], status[7], status[8]]},
+                // 縦ライン
+                {y_line1: [status[0], status[3], status[6]]},
+                {y_line2: [status[1], status[4], status[7]]},
+                {y_line3: [status[2], status[5], status[8]]},
+                // 斜めライン
+                {z_line1: [status[0], status[4], status[8]]},
+                {z_line2: [status[2], status[4], status[6]]}
             ]
         };
     },
