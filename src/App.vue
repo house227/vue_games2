@@ -7,7 +7,8 @@
             :key="n"
             :number="n"
             @click="click_action"
-            @did_event="clicked"
+            @cell_did="cell_did_event"
+            @w_click="w_click_event"
         />
     </div>
 
@@ -52,8 +53,11 @@ export default{
         click_action(){
             this.cnt++
         },
-        clicked(){
+        cell_did_event(){
 
+        },
+        w_click_event(){
+            this.cnt-- 
         }
     }
     // 子から受け取った情報を使うメソッドの作成
