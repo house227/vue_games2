@@ -54,9 +54,9 @@ export default{
             }
 
             //判定が決まった時のコード
-            if(this.result === "〇"){
+            // if(this.result === "〇"){
 
-            }
+            // }
         },
     },
 };

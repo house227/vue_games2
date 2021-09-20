@@ -6,6 +6,7 @@
             v-for="n of 9"
             :key="n"
             :number="n"
+            :result="result"
             @click="click_action"
             @cell_did="cell_did_event"
             @w_click="w_click_event"
@@ -51,7 +52,8 @@ export default{
                 [status[3], status[4], status[5]],
                 [status[6], status[7], status[8]]
             ],
-            result:'no data'
+            result:'no data',
+            judge:0
         };
     },
     components: {
@@ -65,6 +67,7 @@ export default{
 
         // セルに○/✖が入った時のイベント(emit)
         cell_did_event(con_number, num){
+            this.judge++
             // ゲーム状況を記録するステータス配列に〇(1)か×(-1)かを入れる
             this.status[--con_number] = num
             // ライン配列に値を代入する
@@ -77,7 +80,6 @@ export default{
 
         //ライン配列にステータスを随時追加していく 
         game_data(){
-            let result_cnt = 0;
             let x = 0;
             for(let i = 0; i < this.lines.length; i++){
                 for(let j = 0; j < this.lines[i].length; j++){
@@ -86,19 +88,36 @@ export default{
                 }
             }
                 
-            //配列の状況をforで回して確認し、勝敗を判定する
-            //引き分けなら？
+            //横配列の状況をforで回して確認し、勝敗を判定する
             for(let i = 0; i <this.lines.length; i++){
-                let total = 0;
+                //横列用変数
+                let total_yoko = 0;
+                //縦列用変数
+                let total_tate = 0;
+                //斜め用変数
+                let total_naname1 = 0;
+                let total_naname2 = 0;
+
                 for(let j = 0; j < this.lines[i].length; j++){
-                    total += this.lines[i][j];
-                    if(total === 3){
-                        console.log('〇 is Win');
-                        this.result = '〇';
-                    }else if(total === -3){
-                        console.log('✖ is Win');
-                        this.result = '✖';
-                    }
+                    total_yoko += this.lines[i][j];
+                    total_tate += this.lines[j][i];
+                    total_naname1 = (this.lines[0][0] + this.lines[1][1] + this.lines[2][2]);
+                    total_naname2 = (this.lines[0][2] + this.lines[1][1] + this.lines[2][0]);
+                }
+                //〇が勝つ判定
+                if((total_yoko === 3 && this.result === 'no data') || (total_tate === 3 && this.result === 'no data') ||
+                    (total_naname1 === 3 && this.result === 'no data') || (total_naname2 === 3 && this.result === 'no data')){
+                    console.log('〇 is Win');
+                    this.result = '〇';
+                    //✖が勝つ判定
+                }else if((total_yoko === -3 && this.result === 'no data') || (total_tate === -3 && this.result === 'no data') ||
+                    (total_naname1 === -3 && this.result === 'no data') || (total_naname2 === -3 && this.result === 'no data')){
+                    console.log('✖ is Win');
+                    this.result = '✖';
+                }//引き分け
+                if(this.judge === 9 && this.result === 'no data'){
+                    console.log('引き分け')
+                    this.result('drow')
                 }
             }
         }
