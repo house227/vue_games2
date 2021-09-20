@@ -78,15 +78,27 @@ export default{
         game_data(){
             let x = 0;
             for(let i = 0; i < this.lines.length; i++){
-                for(let j = 0; j < this.lines[0].length; j++){
+                for(let j = 0; j < this.lines[i].length; j++){
                     this.lines[i][j] = this.status[x++];
-                    // console.log("ライン配列" + this.lines[i][j])
+                    // console.log("ライン配列" + this.lines[0])
+                }
+            }
+                
+            //配列の状況をforで回して確認し、勝敗を判定する
+            for(let i = 0; i <this.lines.length; i++){
+                let total = 0;
+                for(let j = 0; j < this.lines[i].length; j++){
+                    total += this.lines[i][j];
+                    if(total === 3){
+                        console.log('〇 is Win');
+                    }else if(total === -3){
+                        console.log('✖ is Win');
+                    }
                 }
             }
         }
     }
-    // 子から受け取った情報を使うメソッドの作成
-    // 各コンポーネントが○か✖かを表示
+
 };
 </script>
 
