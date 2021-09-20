@@ -18,7 +18,8 @@ export default{
     props: {
         cnt: Number,
         // 親のkeyから各コンポーネントの番号を受け取る
-        number: Number
+        number: Number,
+        result:String
     },
     mounted(){
         // 子特有のカウンターをブラウザ起動時に０で初期化
@@ -50,6 +51,11 @@ export default{
                 this.$emit('cell_did',this.number, -1)
                 this.$emit('game_data')
                 this.click_cnt++
+            }
+
+            //判定が決まった時のコード
+            if(this.result === "〇"){
+
             }
         },
     },

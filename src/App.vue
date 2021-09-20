@@ -50,7 +50,8 @@ export default{
                 [status[0], status[1], status[2]],
                 [status[3], status[4], status[5]],
                 [status[6], status[7], status[8]]
-            ]
+            ],
+            result:'no data'
         };
     },
     components: {
@@ -76,6 +77,7 @@ export default{
 
         //ライン配列にステータスを随時追加していく 
         game_data(){
+            let result_cnt = 0;
             let x = 0;
             for(let i = 0; i < this.lines.length; i++){
                 for(let j = 0; j < this.lines[i].length; j++){
@@ -85,14 +87,17 @@ export default{
             }
                 
             //配列の状況をforで回して確認し、勝敗を判定する
+            //引き分けなら？
             for(let i = 0; i <this.lines.length; i++){
                 let total = 0;
                 for(let j = 0; j < this.lines[i].length; j++){
                     total += this.lines[i][j];
                     if(total === 3){
                         console.log('〇 is Win');
+                        this.result = '〇';
                     }else if(total === -3){
                         console.log('✖ is Win');
+                        this.result = '✖';
                     }
                 }
             }
