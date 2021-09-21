@@ -1,8 +1,10 @@
 <template>
 <!-- マスに@(v-on:)でクリックイベント追加 -->
+    
     <div class="cell" @click="action">
         <div style="font-size: 100px"> {{ square_cell }}</div>
     </div>
+
 
 </template>
 
@@ -19,7 +21,6 @@ export default{
         cnt: Number,
         // 親のkeyから各コンポーネントの番号を受け取る
         number: Number,
-        result:String
     },
     mounted(){
         // 子特有のカウンターをブラウザ起動時に０で初期化
@@ -42,22 +43,21 @@ export default{
             if(this.cnt % 2 === 0 && this.click_cnt === 0){
                 this.square_cell = "〇";
                 // 自分がクリックされた事を親へ送るemit
-                this.$emit('cell_did',this.number, 1)
-                this.$emit('game_data')
+                this.$emit('cell_game',this.number, 1)
                 this.click_cnt++
                 
             }else if(this.cnt % 2 !== 0 && this.click_cnt === 0){
                 this.square_cell = "✖";
-                this.$emit('cell_did',this.number, -1)
-                this.$emit('game_data')
+                this.$emit('cell_game',this.number, -1)
                 this.click_cnt++
             }
 
             //判定が決まった時のコード
             // if(this.result === "〇"){
-
+            //     console.log('成功');
             // }
         },
+        
     },
 };
 </script>
