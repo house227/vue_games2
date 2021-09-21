@@ -105,13 +105,13 @@ export default{
                     total_naname2 = (this.lines[0][2] + this.lines[1][1] + this.lines[2][0]);
                 }
                 //〇が勝つ判定
-                if((total_yoko === 3 && this.result === 'no data') || (total_tate === 3 && this.result === 'no data') ||
-                    (total_naname1 === 3 && this.result === 'no data') || (total_naname2 === 3 && this.result === 'no data')){
+                if((total_yoko === 3 || total_tate === 3 || total_naname1 === 3 || 
+                    total_naname2 === 3) && this.result === 'no data'){
                     console.log('〇 is Win');
                     this.result = '〇';
                     //✖が勝つ判定
-                }else if((total_yoko === -3 && this.result === 'no data') || (total_tate === -3 && this.result === 'no data') ||
-                    (total_naname1 === -3 && this.result === 'no data') || (total_naname2 === -3 && this.result === 'no data')){
+                }else if((total_yoko === -3 || total_tate === -3 || total_naname1 === -3 ||
+                        total_naname2 === -3) && this.result === 'no data'){
                     console.log('✖ is Win');
                     this.result = '✖';
                 }//引き分け
